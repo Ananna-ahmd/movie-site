@@ -36,10 +36,28 @@ function Header() {
         <div className='flex items-center gap-8 justify-between'>
             <div className='flex gap-8 items-center'>
             <img src={logo} className='w-[80px] md:w-[115px] object-cover' />
+            <div className=' hidden  md:flex  gap-8'>
             {menu.map((item) => (
                 <HeaderItems name={item.name} Icon={item.icon} />
             )
             )}
+            </div>
+            <div className='flex md:hidden gap-5'>
+            {menu.map((item,index) =>index<3 && (
+                <HeaderItems name={''} Icon={item.icon} />
+            )
+            )}
+            <div className='md:hidden'>
+            <HeaderItems name={''} Icon={HiDotsVertical} />
+            <div className='absolute mt-3 bg-blue-400 border-1px p-3'>
+            {menu.map((item,index) =>index>3 && (
+                <HeaderItems name={item.name} Icon={item.icon} />
+            )
+            )}
+            </div>
+
+            </div>
+            </div>
             </div>
             <img src={user} className='w-[40px] rounded-b-full'/>
             
