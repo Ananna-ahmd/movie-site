@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from './../assets/images/Disney+_logo.svg.png'
 import { HiHome,  HiStar, HiPlayCircle, HiTv } from "react-icons/hi2";
 import { HiPlus,HiSearch, HiDotsVertical } from "react-icons/hi";
@@ -6,6 +6,7 @@ import HeaderItems from './HeaderItems';
 import user from './../assets/images/man-user-svgrepo-com.svg'
 
 function Header() {
+    const[toggle,setToggle]=useState(false);
     const menu = [
         {
             name: 'Home',
@@ -36,14 +37,31 @@ function Header() {
         <div className='flex items-center gap-8 justify-between'>
             <div className='flex gap-8 items-center'>
             <img src={logo} className='w-[80px] md:w-[115px] object-cover' />
-            <div className='flex gap-8'>
+            <div className=' hidden  md:flex  gap-8'>
             {menu.map((item) => (
                 <HeaderItems name={item.name} Icon={item.icon} />
             )
-            
             )}
             </div>
+            <div className='flex md:hidden gap-5'>
+            {menu.map((item,index) =>index<3 && (
+                <HeaderItems name={''} Icon={item.icon} />
+            )
+            )}
+           <div className='md:hidden' onClick={()=>setToggle(!toggle)}>
+            <HeaderItems name={''} Icon={HiDotsVertical} />
+           {toggle? <div className='absolute mt-3 bg-blue-400 border-1px p-3 px-5 py-3'>
+            {menu.map((item,index) =>index>3 && (
+                <HeaderItems name={item.name} Icon={item.icon} />
+            )
+            )}
+            </div>:null}
+
             </div>
+            </div>
+            </div>
+
+            
             <img src={user} className='w-[40px] rounded-b-full'/>
             
         </div>
